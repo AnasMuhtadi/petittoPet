@@ -1,213 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:petitto_pet/models/pit_species_model.dart';
+import 'package:petitto_pet/pages/widgets/custem_textfild.dart';
+import 'package:petitto_pet/pages/widgets/custom_pit_type.dart';
 import 'package:petitto_pet/provider/pit_species_provider.dart';
+import 'package:petitto_pet/resources/assetsManager.dart';
 import 'package:petitto_pet/resources/colorsManager.dart';
+import 'package:petitto_pet/resources/valuesManager.dart';
 import 'package:provider/provider.dart';
+
+import '../widgets/linear_count_widget.dart';
 
 bool isSelect = false;
 
 class AddPetNameScreen extends StatelessWidget {
-  AddPetNameScreen({Key? key}) : super(key: key);
-  int currantNum = 0;
+  const AddPetNameScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final PageController controller = PageController();
 
-    List<Widget> mm = [
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Container(
-          height: 35,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.05),
-                  blurRadius: 6,
-                )
-              ]),
-          child: TextFormField(
-            decoration: InputDecoration(
-              fillColor: const Color.fromRGBO(255, 255, 255, 1),
-              filled: true,
-              hintText: "Type name",
-              hintStyle: const TextStyle(
-                  color: Color.fromRGBO(142, 142, 142, 1),
-                  fontSize: 15),
-              contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 24, vertical: 17.5),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-          ),
-        ),
-      ),
-      ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 4,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  Provider.of<PitSpeciesProvider>(context,
-                      listen: false)
-                      .isCheck(index);
-                },
-                overlayColor: MaterialStateProperty.all(
-                    Colors.transparent),
-                child: Container(
-                  height: 80,
-                  width: 80,
-                  margin:
-                  EdgeInsets.symmetric(horizontal: 13.5),
-                  padding: EdgeInsets.all(3),
-                  decoration: Provider.of<PitSpeciesProvider>(
-                      context,
-                      listen: false)
-                      .petSpecies[index]
-                      .isSelect ==
-                      true
-                      ? BoxDecoration(
-                    border: Border.all(
-                        color:
-                        ColorManager.secondaryColor),
-                    borderRadius:
-                    BorderRadius.circular(50),
-                    color: Colors.transparent,
-                  )
-                      : null,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color:
-                          Provider.of<PitSpeciesProvider>(
-                              context)
-                              .petSpecies[index]
-                              .backgroundColor,
-                          borderRadius:
-                          BorderRadius.circular(50)),
-                      child: SvgPicture.asset(
-                        Provider.of<PitSpeciesProvider>(context,
-                            listen: false)
-                            .petSpecies[index]
-                            .iconPath[index],
-                      )),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(Provider.of<PitSpeciesProvider>(context)
-                  .petSpecies[index]
-                  .name)
-            ],
-          );
-        },
-      ),
-      Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              boxShadow: const [
-                BoxShadow(
-                  color: Color.fromRGBO(0, 0, 0, 0.05),
-                  blurRadius: 6,
-                )
-              ]),
-          child: TextFormField(
-            decoration: InputDecoration(
-              fillColor: const Color.fromRGBO(255, 255, 255, 1),
-              filled: true,
-              hintText: "Type name",
-              hintStyle: const TextStyle(
-                  color: Color.fromRGBO(142, 142, 142, 1),
-                  fontSize: 15),
-              contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 24, vertical: 17.5),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(16),
-              ),
-            ),
-          ),
-        ),
-      ),
-      ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              InkWell(
-                onTap: () {
-                  Provider.of<PitSpeciesProvider>(context,
-                      listen: false)
-                      .isCheck(index);
-
-                },
-                overlayColor: MaterialStateProperty.all(
-                    Colors.transparent),
-                child: Container(
-                  height: 80,
-                  width: 80,
-                  margin:
-                  EdgeInsets.symmetric(horizontal: 13.5),
-                  padding: EdgeInsets.all(3),
-                  decoration: Provider.of<PitSpeciesProvider>(
-                      context,
-                      listen: false)
-                      .petSpecies[index]?.isSelect == true
-                      ? BoxDecoration(
-                    border: Border.all(
-                        color:
-                        ColorManager.secondaryColor),
-                    borderRadius:
-                    BorderRadius.circular(50),
-                    color: Colors.transparent,
-                  )
-                      : null,
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color:
-                          Provider.of<PitSpeciesProvider>(
-                              context,
-                              listen: false)
-                              .petSpecies[index].isSelect ==
-                              true ? Provider.of<PitSpeciesProvider>(context).colorGender[index]:
-                          Colors.transparent
-                          ,
-                          borderRadius:
-                          BorderRadius.circular(50)),
-                      child: SvgPicture.asset(
-                        Provider.of<PitSpeciesProvider>(context,
-                            listen: false)
-                            .petSpecies[index]
-                            .iconPath[index],
-                      )),
-                ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(Provider.of<PitSpeciesProvider>(context)
-                  .petSpecies[index]
-                  .name)
-            ],
-          );
-        },
-      ),
-
-    ];
-
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: Container(
-        margin: const EdgeInsets.only(bottom: 24),
+        margin:
+            Provider.of<PitSpeciesProvider>(context).currantNum >
+                    1
+                ?  const EdgeInsets.only(bottom: AppPadding.p44)
+                :  const EdgeInsets.only(bottom:  AppPadding.p24),
         height: 56,
         width: 279,
         decoration: BoxDecoration(
@@ -216,10 +36,11 @@ class AddPetNameScreen extends StatelessWidget {
         ),
         child: ElevatedButton(
             onPressed: () {
+              Provider.of<PitSpeciesProvider>(context, listen: false)
+                  .setLinearCount(isPush: true);
               controller.nextPage(
-                  duration: Duration(milliseconds: 500),
-                  curve: Curves.easeInOut
-              );
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.easeInOut);
             },
             style: ButtonStyle(
                 elevation: MaterialStateProperty.all(0),
@@ -227,278 +48,186 @@ class AddPetNameScreen extends StatelessWidget {
             child: const Text("Next")),
       ),
       body: Padding(
-
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 60,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.arrow_back_ios)),
-                const Text("1/7"),
-              ],
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            Stack(
-              children: [
-                Container(
-                  height: 6,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      color: const Color(0xFF3232321A),
-                      borderRadius: BorderRadius.circular(50)),
-                ),
-                AnimatedContainer(
-                  height: 6,
-                  width: MediaQuery.of(context).size.width *
-                      (0.13 + 0.13 + 0.13 + 0.13 + 0.13),
-                  decoration: BoxDecoration(
-                      color: ColorManager.secondaryColor,
-                      borderRadius: BorderRadius.circular(50)),
-                  duration: const Duration(milliseconds: 500),
-                )
-              ],
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-             SizedBox(
-              height: 64,
-              width: 205,
-              child: Text(
-                Provider.of<PitSpeciesProvider>(context).text[Provider.of<PitSpeciesProvider>(context).currantPage],
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
+        child: Consumer<PitSpeciesProvider>(
+          builder: (context, value, child) {
+            return Column(children: [
+               addVerticalSpace(AppSize.s60),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Provider.of<PitSpeciesProvider>(context, listen: false)
+                            .setLinearCount(isPop: true);
+                        controller.previousPage(
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeIn);
+                      },
+                      icon: const Icon(Icons.arrow_back_ios)),
+                   Text("${value.currantNum+1}/7"),
+                ],
               ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 110,
-              child: Expanded(
-                child: OverflowBox(
-                  maxWidth: MediaQuery.of(context).size.width,
-                  child: PageView(
-                    onPageChanged: (int index){
-                      Provider.of<PitSpeciesProvider>(context).currantPage = index;
-
-                    },
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: controller,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Container(
-                          height: 35,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Color.fromRGBO(0, 0, 0, 0.05),
-                                  blurRadius: 6,
-                                )
-                              ]),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              fillColor: const Color.fromRGBO(255, 255, 255, 1),
-                              filled: true,
-                              hintText: "Type name",
-                              hintStyle: const TextStyle(
-                                  color: Color.fromRGBO(142, 142, 142, 1),
-                                  fontSize: 15),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 24, vertical: 17.5),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 4,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Provider.of<PitSpeciesProvider>(context,
-                                      listen: false)
-                                      .isCheck(index);
-                                },
-                                overlayColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                                child: Container(
-                                  height: 80,
-                                  width: 80,
-                                  margin:
-                                  EdgeInsets.symmetric(horizontal: 13.5),
-                                  padding: EdgeInsets.all(3),
-                                  decoration: Provider.of<PitSpeciesProvider>(
-                                      context,
-                                      listen: false)
-                                      .petSpecies[index]
-                                      .isSelect ==
-                                      true
-                                      ? BoxDecoration(
-                                    border: Border.all(
-                                        color:
-                                        ColorManager.secondaryColor),
-                                    borderRadius:
-                                    BorderRadius.circular(50),
-                                    color: Colors.transparent,
-                                  )
-                                      : null,
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          color:
-                                          Provider.of<PitSpeciesProvider>(
-                                              context)
-                                              .petSpecies[index]
-                                              .backgroundColor,
-                                          borderRadius:
-                                          BorderRadius.circular(50)),
-                                      child: SvgPicture.asset(
-                                        Provider.of<PitSpeciesProvider>(context,
-                                            listen: false)
-                                            .petSpecies[index]
-                                            .iconPath[index],
-                                      )),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(Provider.of<PitSpeciesProvider>(context)
-                                  .petSpecies[index]
-                                  .name)
-                            ],
-                          );
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              boxShadow: const [
-                                BoxShadow(
-                                  color: Color.fromRGBO(0, 0, 0, 0.05),
-                                  blurRadius: 6,
-                                )
-                              ]),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              fillColor: const Color.fromRGBO(255, 255, 255, 1),
-                              filled: true,
-                              hintText: "Type name",
-                              hintStyle: const TextStyle(
-                                  color: Color.fromRGBO(142, 142, 142, 1),
-                                  fontSize: 15),
-                              contentPadding: const EdgeInsets.symmetric(
-                                  horizontal: 24, vertical: 17.5),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 2,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  Provider.of<PitSpeciesProvider>(context,
-                                      listen: false)
-                                      .isCheck(index);
-
-                                },
-                                overlayColor: MaterialStateProperty.all(
-                                    Colors.transparent),
-                                child: Container(
-                                  height: 80,
-                                  width: 80,
-                                  margin:
-                                  EdgeInsets.symmetric(horizontal: 13.5),
-                                  padding: EdgeInsets.all(3),
-                                  decoration: Provider.of<PitSpeciesProvider>(
-                                      context,
-                                      listen: false)
-                                      .petSpecies[index]?.isSelect == true
-                                      ? BoxDecoration(
-                                    border: Border.all(
-                                        color:
-                                        ColorManager.secondaryColor),
-                                    borderRadius:
-                                    BorderRadius.circular(50),
-                                    color: Colors.transparent,
-                                  )
-                                      : null,
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                          color:
-                                          Provider.of<PitSpeciesProvider>(
-                                              context,
-                                              listen: false)
-                                              .petSpecies[index].isSelect ==
-                                              true ? Provider.of<PitSpeciesProvider>(context).colorGender[index]:
-                                          Colors.transparent
-                                          ,
-                                          borderRadius:
-                                          BorderRadius.circular(50)),
-                                      child: SvgPicture.asset(
-                                        Provider.of<PitSpeciesProvider>(context,
-                                            listen: false)
-                                            .petSpecies[index]
-                                            .iconPath[index],
-                                      )),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Text(Provider.of<PitSpeciesProvider>(context)
-                                  .petSpecies[index]
-                                  .name)
-                            ],
-                          );
-                        },
-                      ),
-
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            const Spacer(),
-            const Align(
-                alignment: Alignment.bottomCenter,
+              addVerticalSpace(AppSize.s30),
+              const LinearCountWidget(),
+              addVerticalSpace(AppSize.s32),
+              SizedBox(
+                height: 64,
+                width: 205,
                 child: Text(
-                  "I don’t know",
-                  style: TextStyle(
-                      fontSize: 15,
-                      color: ColorManager.secondaryColor,
-                      fontWeight: FontWeight.w400),
-                )),
-            const SizedBox(
-              height: 20,
-            )
-          ],
+                  value.text[value.currantNum],
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700, fontSize: 24),
+                ),
+              ),
+              addVerticalSpace(AppSize.s24),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                height: 110,
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: OverflowBox(
+                        maxWidth: MediaQuery.of(context).size.width,
+                        child: PageView(
+                          onPageChanged: (int index) {
+                            value.setCurrantNum(index);
+
+                          },
+                          physics: const NeverScrollableScrollPhysics(),
+                          controller: controller,
+                          children: [
+                            const CustomTextFild(
+                              hint: "Add name",
+                            ),
+                            ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 4,
+                              itemBuilder: (context, index) {
+                                return CustomPitTypeWidget(
+                                    onTap: () {
+                                      value.isCheck(index);
+                                    },
+                                    decoration:
+                                        value.petSpecies[index].isSelect == true
+                                            ? BoxDecoration(
+                                                border: Border.all(
+                                                    color: ColorManager
+                                                        .secondaryColor),
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                color: Colors.transparent,
+                                              )
+                                            : null,
+                                    cycleColor:
+                                        value.petSpecies[index].backgroundColor,
+                                    typeName: value.petSpecies[index].name,
+                                    child: SvgPicture.asset(
+                                        SvgAssets.animals[index]));
+                              },
+                            ),
+                            const CustomTextFild(
+                              hint: "Type pet's breed",
+                            ),
+                            ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 2,
+                              itemBuilder: (context, index) {
+                                return CustomPitTypeWidget(
+                                  onTap: () {
+                                    value.isCheck(index);
+                                  },
+                                  decoration:
+                                      value.petSpecies[index].isSelect == true
+                                          ? BoxDecoration(
+                                              border: Border.all(
+                                                  color: ColorManager
+                                                      .secondaryColor),
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              color: Colors.transparent,
+                                            )
+                                          : BoxDecoration(
+                                              border: Border.all(
+                                                  color: Color(0xFF3232324D)),
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                  cycleColor:
+                                      value.petSpecies[index].isSelect == true
+                                          ? value.colorGender[index]
+                                          : Colors.transparent,
+                                  typeName: "",
+                                  child:
+                                      SvgPicture.asset(SvgAssets.gender[index]),
+                                );
+                              },
+                            ),
+                            ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 2,
+                              itemBuilder: (context, index) {
+                                return CustomPitTypeWidget(
+                                  onTap: () {
+                                    value.isCheck(index);
+                                  },
+                                  decoration:
+                                      value.petSpecies[index].isSelect == true
+                                          ? BoxDecoration(
+                                              border: Border.all(
+                                                  color: ColorManager
+                                                      .secondaryColor),
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              color: Colors.transparent,
+                                            )
+                                          : BoxDecoration(
+                                              border: Border.all(
+                                                  color: Color(0xFF3232324D)),
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                            ),
+                                  cycleColor:
+                                      value.petSpecies[index].isSelect == true
+                                          ? value.colorGender[0]
+                                          : Colors.transparent,
+                                  typeName: "",
+                                  child: Center(
+                                      child: Text(
+                                    (index == 0) ? "Yes" : "No",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        color: ColorManager.mainColor),
+                                  )),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Spacer(),
+              Visibility(
+                visible: value.currantNum > 1,
+                child: const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Text(
+                      "I don’t know",
+                      style: TextStyle(
+                          fontSize: 15,
+                          color: ColorManager.secondaryColor,
+                          fontWeight: FontWeight.w400),
+                    )),
+              ),
+              const SizedBox(
+                height: 20,
+              )
+            ]);
+          },
         ),
       ),
     );

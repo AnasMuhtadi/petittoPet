@@ -3,6 +3,24 @@ import 'package:petitto_pet/models/pit_species_model.dart';
 
 class PitSpeciesProvider extends ChangeNotifier {
   bool genderMile = true;
+  int currantNum = 0;
+  double linearCount =0.13;
+
+
+  void setCurrantNum(int index) {
+    currantNum = index;
+    notifyListeners();
+  }
+
+  void setLinearCount({bool isPop = false , bool isPush = false }) {
+    if(linearCount > 0.13 && isPop) {
+        linearCount -= 0.13;
+      } else if(linearCount < 0.65 && isPush) {
+        linearCount += 0.13;
+
+    }
+    notifyListeners();
+  }
 
   void isCheck(int index) {
     for (int i = 0; i < petSpecies.length; i++) {
@@ -11,7 +29,6 @@ class PitSpeciesProvider extends ChangeNotifier {
     petSpecies[index].isSelect = true;
     notifyListeners();
   }
-  int currantPage = 0;
 
 
   final List<PitSpeciesModel> petSpecies = [
@@ -38,7 +55,7 @@ class PitSpeciesProvider extends ChangeNotifier {
   ];
 
   List<Color> colorGender = [Color(0xFFC3E4F2),Color(0xFFDFD4FB)];
-  List<String> text = ["What’s the name of your pet?","What’s your pet’s species?","What about your pet’s breed?"];
+  List<String> text = ["What’s the name of your pet?","What’s your pet’s species?","What about your pet’s breed?","What’s your pet’sgender?","Is your pet neuter?"];
 
 
   void isMile(int index){
