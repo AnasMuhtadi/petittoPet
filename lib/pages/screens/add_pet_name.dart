@@ -36,8 +36,7 @@ class AddPetNameScreen extends StatelessWidget {
         ),
         child: ElevatedButton(
             onPressed: () {
-              Provider.of<PitSpeciesProvider>(context, listen: false)
-                  .setLinearCount(isPush: true);
+
               controller.nextPage(
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut);
@@ -57,7 +56,6 @@ class AddPetNameScreen extends StatelessWidget {
                 children: [
                   IconButton(
                       onPressed: () {
-                        value.setLinearCount(isPop: true);
                         controller.previousPage(
                             duration: const Duration(milliseconds: 500),
                             curve: Curves.easeIn);

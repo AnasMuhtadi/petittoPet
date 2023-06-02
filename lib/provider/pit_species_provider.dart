@@ -8,19 +8,14 @@ class PitSpeciesProvider extends ChangeNotifier {
    int currantNum = 0;
    double linearCount =0.13;
   //********اعادة تعين قيمة CurrantNum ********
-  void setCurrantNum(int index) {
-    currantNum = index;
-    notifyListeners();
-  }
-
-  //********اعادة تعين قيمة LinearCount ********
-
-  void setLinearCount({bool isPop = false, bool isPush = false}) {
-    if (linearCount > 0.13 && isPop) {
-      linearCount -= 0.13;
-    } else if (linearCount < 0.65 && isPush) {
+  void setCurrantNum(int index,) {
+    if (index > currantNum) {
       linearCount += 0.13;
+    } else if (linearCount < currantNum) {
+      linearCount -= 0.13;
     }
+    currantNum = index;
+
     notifyListeners();
   }
 
