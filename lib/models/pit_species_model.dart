@@ -6,6 +6,7 @@ class PitSpeciesModel {
   Color backgroundColor;
   bool isSelect;
   bool? isMile;
+  bool? isNeuter;
 
   PitSpeciesModel(
       {required this.name,

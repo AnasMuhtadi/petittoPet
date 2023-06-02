@@ -1,35 +1,62 @@
 import 'package:flutter/cupertino.dart';
 import 'package:petitto_pet/models/pit_species_model.dart';
 
+import '../resources/variable_manager.dart';
+
 class PitSpeciesProvider extends ChangeNotifier {
-  bool genderMile = true;
-  int currantNum = 0;
-  double linearCount =0.13;
 
-
+   int currantNum = 0;
+   double linearCount =0.13;
+  //********اعادة تعين قيمة CurrantNum ********
   void setCurrantNum(int index) {
     currantNum = index;
     notifyListeners();
   }
 
-  void setLinearCount({bool isPop = false , bool isPush = false }) {
-    if(linearCount > 0.13 && isPop) {
-        linearCount -= 0.13;
-      } else if(linearCount < 0.65 && isPush) {
-        linearCount += 0.13;
+  //********اعادة تعين قيمة LinearCount ********
 
+  void setLinearCount({bool isPop = false, bool isPush = false}) {
+    if (linearCount > 0.13 && isPop) {
+      linearCount -= 0.13;
+    } else if (linearCount < 0.65 && isPush) {
+      linearCount += 0.13;
     }
     notifyListeners();
   }
 
-  void isCheck(int index) {
+  //********فحص القيمة المحددة ********
+
+  void isCheck(int index,String type) {
+    if(type == "petType"){
     for (int i = 0; i < petSpecies.length; i++) {
       petSpecies[i].isSelect = false;
     }
     petSpecies[index].isSelect = true;
+  }else if(type == "gender"){
+      for (int i = 0; i < petSpecies.length; i++) {
+        petSpecies[i].isMile = false;
+      }
+      petSpecies[index].isMile = true;
+    }else if(type == "neuter"){
+      for (int i = 0; i < petSpecies.length; i++) {
+        petSpecies[i].isNeuter = false;
+      }
+      petSpecies[index].isNeuter = true;
+    }
     notifyListeners();
+
   }
 
+  //******** فحص الجنس ********
+
+  void isMile(int index) {
+    if (index != 0) {
+      petSpecies[index].isMile = false;
+    } else {
+      petSpecies[index].isMile = true;
+    }
+    notifyListeners();
+  }
 
   final List<PitSpeciesModel> petSpecies = [
     PitSpeciesModel(
@@ -53,18 +80,4 @@ class PitSpeciesProvider extends ChangeNotifier {
         backgroundColor: const Color(0xFFF5E5C0),
         isSelect: false),
   ];
-
-  List<Color> colorGender = [Color(0xFFC3E4F2),Color(0xFFDFD4FB)];
-  List<String> text = ["What’s the name of your pet?","What’s your pet’s species?","What about your pet’s breed?","What’s your pet’sgender?","Is your pet neuter?"];
-
-
-  void isMile(int index){
-    if(index != 0){
-      genderMile = false;
-    }else{
-      genderMile= true;
-    }
-    notifyListeners();
-
-  }
 }

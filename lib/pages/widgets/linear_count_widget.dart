@@ -4,6 +4,7 @@ import 'package:petitto_pet/provider/pit_species_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../resources/colorsManager.dart';
+import '../../resources/variable_manager.dart';
 
 class LinearCountWidget extends StatelessWidget {
   const LinearCountWidget({Key? key}) : super(key: key);
