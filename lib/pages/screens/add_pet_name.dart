@@ -9,7 +9,9 @@ import 'package:petitto_pet/resources/valuesManager.dart';
 import 'package:provider/provider.dart';
 
 import '../../resources/variable_manager.dart';
+import '../widgets/Custom_pit_gender.dart';
 import '../widgets/custem_wheel_chooser_widget.dart';
+import '../widgets/custom_pit_neuter.dart';
 import '../widgets/linear_count_widget.dart';
 
 bool isSelect = false;
@@ -37,7 +39,6 @@ class AddPetNameScreen extends StatelessWidget {
         ),
         child: ElevatedButton(
             onPressed: () {
-
               controller.nextPage(
                   duration: const Duration(milliseconds: 500),
                   curve: Curves.easeInOut);
@@ -130,132 +131,8 @@ class AddPetNameScreen extends StatelessWidget {
                             const CustomTextFild(
                               hint: "Type pet's breed",
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomPitTypeWidget(
-                                  onTap: () {
-                                    value.isCheck(0, "gender");
-                                  },
-                                  decoration: value.petSpecies[0].isMile == true
-                                      ? BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  ColorManager.secondaryColor),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: Colors.transparent,
-                                        )
-                                      : BoxDecoration(
-                                          border: Border.all(
-                                              color: const Color(0xFF3232324D)),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                  cycleColor: value.petSpecies[0].isMile == true
-                                      ? VariableAddPet.colorGender[0]
-                                      : Colors.transparent,
-                                  typeName: "",
-                                  child: SvgPicture.asset(SvgAssets.gender[0]),
-                                ),
-                                CustomPitTypeWidget(
-                                  onTap: () {
-                                    value.isCheck(1, "gender");
-                                  },
-                                  decoration: value.petSpecies[1].isMile == true
-                                      ? BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  ColorManager.secondaryColor),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: Colors.transparent,
-                                        )
-                                      : BoxDecoration(
-                                          border: Border.all(
-                                              color: const Color(0xFF3232324D)),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                  cycleColor: value.petSpecies[1].isMile == true
-                                      ? VariableAddPet.colorGender[1]
-                                      : Colors.transparent,
-                                  typeName: "",
-                                  child: SvgPicture.asset(SvgAssets.gender[1]),
-                                )
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                CustomPitTypeWidget(
-                                  onTap: () {
-                                    value.isCheck(0, "neuter");
-                                  },
-                                  decoration: value.petSpecies[0].isNeuter ==
-                                          true
-                                      ? BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  ColorManager.secondaryColor),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: Colors.transparent,
-                                        )
-                                      : BoxDecoration(
-                                          border: Border.all(
-                                              color: const Color(0xFF3232324D)),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                  cycleColor:
-                                      value.petSpecies[0].isNeuter == true
-                                          ? ColorManager.whiteBlue
-                                          : Colors.transparent,
-                                  typeName: "",
-                                  child: const Center(
-                                      child: Text(
-                                    "Yes",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: ColorManager.mainColor),
-                                  )),
-                                ),
-                                CustomPitTypeWidget(
-                                  onTap: () {
-                                    value.isCheck(1, "neuter");
-                                  },
-                                  decoration: value.petSpecies[1].isNeuter ==
-                                          true
-                                      ? BoxDecoration(
-                                          border: Border.all(
-                                              color:
-                                                  ColorManager.secondaryColor),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: Colors.transparent,
-                                        )
-                                      : BoxDecoration(
-                                          border: Border.all(
-                                              color: const Color(0xFF3232324D)),
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                  cycleColor:
-                                      value.petSpecies[1].isNeuter == true
-                                          ? ColorManager.whiteBlue
-                                          : Colors.transparent,
-                                  typeName: "",
-                                  child: const Center(
-                                      child: Text(
-                                    "No",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        color: ColorManager.mainColor),
-                                  )),
-                                )
-                              ],
-                            ),
+                            const CustomPitGender(),
+                            const CustomPitNeuter(),
                             const CustomWheelChooserWidget()
                           ],
                         ),
