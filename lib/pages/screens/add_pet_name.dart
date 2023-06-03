@@ -9,6 +9,7 @@ import 'package:petitto_pet/resources/valuesManager.dart';
 import 'package:provider/provider.dart';
 
 import '../../resources/variable_manager.dart';
+import '../widgets/custem_wheel_chooser_widget.dart';
 import '../widgets/linear_count_widget.dart';
 
 bool isSelect = false;
@@ -70,7 +71,7 @@ class AddPetNameScreen extends StatelessWidget {
             addVerticalSpace(AppSize.s32),
             SizedBox(
               height: AppSize.s64,
-              width: AppSize.s200,
+              width: AppSize.s220,
               child: Text(
                 VariableAddPet.text[
                     Provider.of<PitSpeciesProvider>(context, listen: false)
@@ -83,7 +84,7 @@ class AddPetNameScreen extends StatelessWidget {
             addVerticalSpace(AppSize.s24),
             SizedBox(
               width: MediaQuery.of(context).size.width,
-              height: 110,
+              height: 250,
               child: Column(
                 children: [
                   Consumer<PitSpeciesProvider>(
@@ -255,6 +256,7 @@ class AddPetNameScreen extends StatelessWidget {
                                 )
                               ],
                             ),
+                            const CustomWheelChooserWidget()
                           ],
                         ),
                       ),
