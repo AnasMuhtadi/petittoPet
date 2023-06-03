@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petitto_pet/pages/widgets/wheel_widgets/gradient_circle_line.dart';
 import 'package:wheel_chooser/wheel_chooser.dart';
 
 class CustomWheelChooserWidget extends StatelessWidget {
@@ -10,22 +11,13 @@ class CustomWheelChooserWidget extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: 1,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.centerLeft,
-                    colors: [
-                  Colors.white,
-                  Color(0xffC4C4C4),
-                  Colors.white
-                ])),
-          ),
+          const GradientCircleLine(),
           SizedBox(
             height: 80,
             child: WheelChooser.integer(
-              onValueChanged: (s) {},
+              onValueChanged: (s) {
+                
+              },
               maxValue: 99,
               minValue: 1,
               initValue: 2,
@@ -42,19 +34,7 @@ class CustomWheelChooserWidget extends StatelessWidget {
             ),
           ),
           const Text("years",style: TextStyle(fontSize: 15)),
-          Container(
-            margin: EdgeInsets.only(top: 16),
-            height: 1,
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.centerRight,
-                    end: Alignment.centerLeft,
-                    colors: [
-                  Colors.white,
-                  Color(0xffC4C4C4),
-                  Colors.white
-                ])),
-          ),
+          const GradientCircleLine(),
           SizedBox(
             height: 80,
             child: WheelChooser.integer(
@@ -76,7 +56,7 @@ class CustomWheelChooserWidget extends StatelessWidget {
           ),
           const Text("months",style: TextStyle(fontSize: 15),),
           Container(
-            margin: EdgeInsets.only(top: 16),
+            margin: const EdgeInsets.only(top: 16),
             height: 1,
             decoration: const BoxDecoration(
                 gradient: LinearGradient(
